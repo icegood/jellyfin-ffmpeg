@@ -1,0 +1,23 @@
+services:
+  jellyfin_ffmpeg:
+    build: 
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      network: host
+      args:
+        GCC_RELEASE_VERSION: 13
+        LLVM_RELEASE_VERSION: 19
+        LLVMSPIRVLIB_RELEASE_VERSION: 19
+        BUILD_ARCHITECTURE: amd64
+        myuser: ice
+        myuid: 1000
+        mygid: 1000
+    cap_add:
+      - NET_ADMIN
+    image: jellyfin_ffmpeg:ice_master-amd64
+    container_name: jellyfin_ffmpeg_runner
+    volumes:
+      - "/media/ice/backup/test_media:/test_media"
+      - "..:/workspaces/jellyfin-ffmpeg"
+    network_mode: 'host'
+    restart: 'unless-stopped'

@@ -5654,7 +5654,6 @@ check_host_cflags_cc -std=$stdc ctype.h "__STDC_VERSION__ >= 201112L" ||
     check_host_cflags_cc -std=c11 ctype.h "__STDC_VERSION__ >= 201112L" || die "Host compiler lacks C11 support"
 
 check_host_cflags -Wall
-check_host_cflags $host_cflags_speed
 
 check_64bit(){
     arch32=$1
@@ -7406,7 +7405,8 @@ elif enabled iconv; then
     check_func_headers iconv.h iconv || check_lib iconv iconv.h iconv -liconv
 fi
 
-enabled debug && add_cflags -g"$debuglevel" && add_asflags -g"$debuglevel"
+enabled debug && add_cflags -g"$debuglevel" -ggdb && add_asflags -g"$debuglevel"
+disabled debug && check_host_cflags $host_cflags_speed
 
 # add some useful compiler flags if supported
 check_cflags -Wdeclaration-after-statement

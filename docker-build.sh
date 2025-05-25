@@ -722,7 +722,7 @@ EOF
 # Set the architecture-specific options
 case ${ARCH} in
     'amd64')
-        apt-get update && apt-get dist-upgrade -y
+        #apt-get update && apt-get dist-upgrade -y
         prepare_extra_common
         prepare_extra_amd64
         CONFIG_SITE=""

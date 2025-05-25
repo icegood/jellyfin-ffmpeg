@@ -1,0 +1,60 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "C/C++ Debug (gdb Launch)",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/ffmpeg_g",
+			"args": [
+			  "-analyzeduration", "200M",
+			  "-probesize", "1G",
+			  "-i", "/workspaces/jellyfin-ffmpeg/.debug/MOV08513_libvpx-vp9_libmp3lame.mkv",
+			  "-map_metadata", "-1",
+			  "-map_chapters", "-1",
+			  "-threads", "0",
+			  "-map", "0:0",
+			  "-map", "0:1",
+			  "-map", "-0:s",
+			  "-codec:v:0", "libx264",
+			  "-preset", "veryfast",
+			  "-crf", "23",
+			  "-maxrate", "12254938",
+			  "-bufsize", "24509876",
+			  "-profile:v:0", "high",
+			  "-level", "51",
+			  "-x264opts:0", "subme=0:me_range=16:rc_lookahead=10:me=hex:open_gop=0",
+			  "-force_key_frames:0", "expr:gte(t,n_forced*3)",
+			  "-sc_threshold:v:0", "0",
+			  "-vf", "setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709,scale=trunc(min(max(iw\\,ih*a)\\,min(640\\,480*a))/2)*2:trunc(min(max(iw/a\\,ih)\\,min(640/a\\,480))/2)*2,format=yuv420p",
+			  "-codec:a:0", "copy",
+			  "-copyts",
+			  "-avoid_negative_ts", "disabled",
+			  "-max_muxing_queue_size", "2048",
+			  "-f", "hls",
+			  "-max_delay", "5000000",
+			  "-hls_time", "3",
+			  "-hls_segment_type", "mpegts",
+			  "-start_number", "0",
+			  "-hls_segment_filename", "/cache/transcodes/bdfaabd30031e161aa2bbed0cb07e247%d.ts",
+			  "-hls_playlist_type", "vod",
+			  "-hls_list_size", "0",
+			  "-y", "/cache/transcodes/bdfaabd30031e161aa2bbed0cb07e247.m3u8"
+			],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"MIMode": "gdb",
+			"setupCommands": [
+				{
+					"description": "Enable pretty-printing for gdb",
+					"text": "-enable-pretty-printing",
+					"ignoreFailures": true
+				}
+			]
+		}
+	]
+}
